@@ -41,7 +41,7 @@ COPY --from=nodeportal /build_dir/package*.json /usr/share/nginx/
 VOLUME /var/cache/nginx /var/log/nginx /run
 
 STOPSIGNAL SIGQUIT
-
+RUN chown nginx.nginx -R /usr/share/nginx/html
 HEALTHCHECK CMD curl --fail -s http://localhost:8080 || curl -k --fail -s https://localhost:8443 || exit 1
 USER nginx
 CMD ["nginx", "-g", "daemon off;"]
